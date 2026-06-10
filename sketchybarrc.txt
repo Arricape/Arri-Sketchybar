@@ -5,16 +5,20 @@ sketchybar --bar position=top layer=overlay level=floating height=25 blur_radius
 
 ##### Defaults #####
 default=(
-  padding_left=5
-  padding_right=5
+  background.drawing=on
+  background.color=0x66A65B9C
+  background.corner_radius=8
+  background.height=18
+  padding_left=2
+  padding_right=2
   icon.font="Hack Nerd Font:Bold:17.0"
   label.font="Hack Nerd Font:Bold:14.0"
-  icon.color=0xffffffff
-  label.color=0xffffffff
-  icon.padding_left=4
-  icon.padding_right=4
-  label.padding_left=4
-  label.padding_right=4
+  icon.color=0xff66FF76
+  label.color=0xD966F0FF
+  icon.padding_left=8
+  icon.padding_right=2
+  label.padding_left=2
+  label.padding_right=8
 )
 sketchybar --default "${default[@]}"
 
@@ -27,11 +31,9 @@ do
   space=(
     space="$sid"
     icon="${SPACE_ICONS[i]}"
-    icon.padding_left=7
-    icon.padding_right=7
-    background.color=0x40ffffff
-    background.corner_radius=5
-    background.height=25
+    icon.padding_left=8
+    icon.padding_right=8
+    background.height=20
     label.drawing=off
     script="$PLUGIN_DIR/space.sh"
     click_script="yabai -m space --focus $sid"
@@ -43,14 +45,18 @@ done
 
 sketchybar --add item chevron left \
            --set chevron icon= label.drawing=off \
+	     icon.padding_left=8 \
+	     icon.padding_right=8 \
+	     background.height=20 \
            --add item front_app left \
-           --set front_app icon.drawing=off script="$PLUGIN_DIR/front_app.sh" \
+           --set front_app icon.drawing=off script="$PLUGIN_DIR/front_app.sh"\
+	     label.padding_left=8 \
            --subscribe front_app front_app_switched
 
 ##### Right Items #####
 
 sketchybar --add item clock right \
-           --set clock update_freq=10 icon=  script="$PLUGIN_DIR/clock.sh" \
+           --set clock update_freq=10 icon=  script="$PLUGIN_DIR/clock.sh" \ "$PLUGIN_DIR/matrix_color.sh clock"
            --add item volume right \
            --set volume script="$PLUGIN_DIR/volume.sh" \
            --subscribe volume volume_change \
